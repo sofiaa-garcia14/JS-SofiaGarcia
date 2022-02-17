@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket e-commerce</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="./media/bootstrap-logo.svg" alt="" width="30" height="24">
+      </a>
+    </div>
+  </nav>
+
+  <div class="container d-flex flex-column align-items-center p-4 mt-4">
+    <h2 class="mb-4">Order Summary</h2>
+    <p id="message-empty-cart" class="d-none w-50 text-center">The cart is empty. <a href="#">Find an event</a></p>
+    <div class="row">
+      
+    </div>
+    <div id="ticket-checkout" class="card w-50 shadow-sm">
+      <div class="card-body d-flex">
+        <div class="picture me-3">
+          <img src="./media/events/the_weekend.jpg" class="img-thumbnail rounded-2" alt="..." height="300" width="300">
+        </div>
+        <div class="description d-flex flex-column justify-content-center">
+          <h5 id="ticket-name" class="card-title">Event title</h5>
+          <p id="ticket-description" class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <div class="quantity d-flex align-items-center">
+            <button id="rest-ticket" class="btn btn-outline-dark disabled">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+              </svg>
+            </button>
+            <span id="ticket-amount" class="px-3 fs-6">1</span>
+            <button id="sum-ticket" class="btn btn-outline-dark">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+              </svg>
+            </button>
+            <span class="px-3 fs-5">x</span>
+            <span id="ticket-price" class="fs-6 fw-bold">$0.00</span>
+          </div>
+        </div>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="card d-flex flex-row w-50 p-5">
+      <div class="col description-prices">
+        <ul>
+          <li>Subtotal</li>
+          <li>Tax</li>
+          <li>Shipping</li>
+          <li class="fs-5">Total</li>
+        </ul>
+      </div>
+      <div class="col list-prices">
+        <ul>
+          <li id="subtotal">$0.00</li>
+          <li id="tax">$0.00</li>
+          <li id="shipping">$0.00</li>
+          <li id="total" class="fs-5">$0.00</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<script src="./script.js"></script>
+</body>
+</html>
