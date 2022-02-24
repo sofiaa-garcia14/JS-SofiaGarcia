@@ -11146,4 +11146,20 @@ ul {
   border: 1px solid #fff;
 }
 
+#ticket-checkout:hover {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+#cart-title, #extra-title {
+  color: #9926f0;
+}
+
+#total, #total-title {
+  font-weight: 700;
+}
+
 /*# sourceMappingURL=style.css.map */

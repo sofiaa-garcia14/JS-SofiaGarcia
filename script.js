@@ -7,6 +7,21 @@ const ticketWeekend = {
   shipping: 0,
 };
 
+const extraItems = [
+  {
+    name: "Food Voucher",
+    price: 15,
+  },
+  {
+    name: "Event T-Shirt",
+    price: 30,
+  },
+  {
+    name: "Gift Box",
+    price: 5,
+  },
+];
+
 const ticketName = document.getElementById("ticket-name");
 const ticketDescription = document.getElementById("ticket-description");
 const ticketPrice = document.getElementById("ticket-price");
@@ -20,8 +35,13 @@ const subtotal = document.getElementById("subtotal");
 const tax = document.getElementById("tax");
 const shipping = document.getElementById("shipping");
 const total = document.getElementById("total");
+const extraItemsContainer = document.querySelector(".list-group");
 
 let tickets = 1;
+let subTotal = 0;
+let totalTax = 0;
+let totalShipping = 0;
+let totalPrice = 0;
 
 const displayTicket = (ticket) => {
   ticketName.textContent = ticket.name;
@@ -32,11 +52,11 @@ const displayTicket = (ticket) => {
 const updatePrice = (ticket) => ticket.price * tickets;
 
 const displayInfoPrices = () => {
-  let sub = updatePrice(ticketWeekend);
-  let taxPrice = Math.round(ticketWeekend.tax * sub * 100) / 100;
-  let totalPrice = Math.round((sub + taxPrice) * 100) / 100;
-  subtotal.textContent = `$${sub}`;
-  tax.textContent = `$${taxPrice}`;
+  subTotal = updatePrice(ticketWeekend);
+  totalTax = Math.round(ticketWeekend.tax * subTotal * 100) / 100;
+  totalPrice = Math.round((subTotal + totalTax) * 100) / 100;
+  subtotal.textContent = `$${subTotal}`;
+  tax.textContent = `$${totalTax}`;
   total.textContent = `$${totalPrice}`;
 };
 
@@ -81,7 +101,25 @@ const removeTicket = () => {
   resetInfoPrices();
 };
 
+const displayExtraItems = (items) => {
+  extraItemsContainer.innerHTML = "";
+  items.forEach((item) => {
+    const html = `
+    <label class="list-group-item d-flex gap-3">
+      <input class="form-check-input flex-shrink-0 check-extra_item" type="checkbox" value="" style="font-size: 1.375em;">
+      <span class="pt-1 form-checked-content">
+        <strong>${item["name"]}</strong>
+        <small class="d-block text-muted">
+          $${item["price"]}
+        </small>
+      </span>
+    </label>
+    `;
+    extraItemsContainer.insertAdjacentHTML("afterbegin", html);
+  });
+};
 btnClose.addEventListener("click", removeTicket);
 
 displayTicket(ticketWeekend);
 displayInfoPrices(ticketWeekend);
+displayExtraItems(extraItems);
