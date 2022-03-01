@@ -106,7 +106,7 @@ const displayExtraItems = (items) => {
   items.forEach((item) => {
     const html = `
     <label class="list-group-item d-flex gap-3">
-      <input class="form-check-input flex-shrink-0 check-extra_item" type="checkbox" value="" style="font-size: 1.375em;">
+      <input class="form-check-input flex-shrink-0 check-extra_item" type="checkbox" name="extra-items" value="${item["price"]}" style="font-size: 1.375em;">
       <span class="pt-1 form-checked-content">
         <strong>${item["name"]}</strong>
         <small class="d-block text-muted">
@@ -123,3 +123,18 @@ btnClose.addEventListener("click", removeTicket);
 displayTicket(ticketWeekend);
 displayInfoPrices(ticketWeekend);
 displayExtraItems(extraItems);
+
+const checkboxes = document.querySelectorAll(
+  "input[type=checkbox][name=extra-items]"
+);
+console.log(checkboxes);
+let sumExtraItems = [];
+
+checkboxes.forEach(function (checkbox) {
+  checkbox.addEventListener("change", function () {
+    sumExtraItems = Array.from(checkboxes)
+      .filter((i) => i.checked)
+      .map((i) => i.value);
+    console.log(sumExtraItems);
+  });
+});
