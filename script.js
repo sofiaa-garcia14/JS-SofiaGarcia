@@ -117,7 +117,14 @@ const displayExtraItems = (items) => {
     `;
     extraItemsContainer.insertAdjacentHTML("afterbegin", html);
   });
+  const extraItemsTotalH = `
+  <label class="list-group-item d-flex gap-3">
+      <strong id="extra-items-quantity">Total de items extra: $0.00</strong>
+  </label>
+  `;
+  extraItemsContainer.insertAdjacentHTML("afterend", extraItemsTotalH);
 };
+
 btnClose.addEventListener("click", removeTicket);
 
 displayTicket(ticketWeekend);
@@ -127,14 +134,30 @@ displayExtraItems(extraItems);
 const checkboxes = document.querySelectorAll(
   "input[type=checkbox][name=extra-items]"
 );
-console.log(checkboxes);
-let sumExtraItems = [];
 
+/* 
+let sumExtraItems = [];
 checkboxes.forEach(function (checkbox) {
   checkbox.addEventListener("change", function () {
     sumExtraItems = Array.from(checkboxes)
       .filter((i) => i.checked)
       .map((i) => i.value);
     console.log(sumExtraItems);
+  });
+});
+ */
+
+const extraItemsQuantity = document.getElementById("extra-items-quantity");
+let sumExtraItems = 0;
+
+checkboxes.forEach(function (checkbox) {
+  checkbox.addEventListener("change", function () {
+    if (checkbox.checked) {
+      sumExtraItems += parseFloat(checkbox.value);
+    } else {
+      sumExtraItems -= parseFloat(checkbox.value);
+    }
+    console.log(sumExtraItems);
+    extraItemsQuantity.textContent = `Total de items extra: $${sumExtraItems}`;
   });
 });
