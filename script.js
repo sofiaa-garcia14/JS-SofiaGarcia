@@ -9,14 +9,17 @@ const ticketWeekend = {
 
 const extraItems = [
   {
+    id: 1,
     name: "Food Voucher",
     price: 15,
   },
   {
+    id: 2,
     name: "Event T-Shirt",
     price: 30,
   },
   {
+    id: 3,
     name: "Gift Box",
     price: 5,
   },
@@ -36,6 +39,7 @@ const tax = document.getElementById("tax");
 const shipping = document.getElementById("shipping");
 const total = document.getElementById("total");
 const extraItemsContainer = document.querySelector(".list-group");
+localStorage.setItem("Cart", JSON.stringify([]));
 
 let tickets = 1;
 let subTotal = 0;
@@ -106,9 +110,9 @@ const displayExtraItems = (items) => {
   items.forEach((item) => {
     const html = `
     <label class="list-group-item d-flex gap-3">
-      <input class="form-check-input flex-shrink-0 check-extra_item" type="checkbox" name="extra-items" value="${item["price"]}" style="font-size: 1.375em;">
+      <input class="form-check-input flex-shrink-0 check-extra_item" type="checkbox" name="extra-items" value="${item["id"]}" style="font-size: 1.375em;">
       <span class="pt-1 form-checked-content">
-        <strong>${item["name"]}</strong>
+        <strong>${item["price"]}</strong>
         <small class="d-block text-muted">
           $${item["price"]}
         </small>
@@ -151,11 +155,23 @@ const extraItemsQuantity = document.getElementById("extra-items-quantity");
 let sumExtraItems = 0;
 
 checkboxes.forEach(function (checkbox) {
+  let filtered;
+  let product;
   checkbox.addEventListener("change", function () {
+    const cart = JSON.parse(localStorage.getItem("Cart"));
     if (checkbox.checked) {
-      sumExtraItems += parseFloat(checkbox.value);
+      product = extraItems.find((item) => item.id === Number(checkbox.value));
+      sumExtraItems += product.price;
+      cart.push(product);
+      localStorage.setItem("Cart", JSON.stringify(cart));
     } else {
-      sumExtraItems -= parseFloat(checkbox.value);
+      if (cart.length > 1) {
+        filtered = cart.filter((item) => item.id !== Number(checkbox.value));
+        localStorage.setItem("Cart", JSON.stringify(filtered));
+      } else {
+        localStorage.setItem("Cart", JSON.stringify([]));
+      }
+      sumExtraItems -= product.price;
     }
     console.log(sumExtraItems);
     extraItemsQuantity.textContent = `Total de items extra: $${sumExtraItems}`;
